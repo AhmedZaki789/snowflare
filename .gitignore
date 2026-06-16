@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# logs / temp
+*.log
+spec-tmp.png
+spec-view.html
+
+# editor
+.vscode/
+.idea/

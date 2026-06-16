@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnowFlare — Built. Yours.</title>
+  <meta name="description" content="SnowFlare is a digital group uniting strategy, engineering and AI-powered creative into one accountable system. We build digital that's yours." />
+  <meta name="theme-color" content="#0B1428" />
+  <meta property="og:title" content="SnowFlare — Built. Yours." />
+  <meta property="og:description" content="A digital group: strategy, engineering and AI-powered creative, integrated." />
+  <meta property="og:image" content="assets/img/logo/icon-colored.png" />
+  <link rel="icon" type="image/png" href="assets/img/logo/icon-colored.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ===== SVG sprite ===== -->
+<svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="nexus" viewBox="0 0 240 252">
+    <g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M120 156 V238 M62 206 L120 156 L178 206"/>
+      <path d="M16 144 L80 144 L104 116 L136 116 L160 144 L224 144"/>
+      <path d="M120 14 V84 M60 46 L104 88 M180 46 L136 88"/>
+    </g>
+  </symbol>
+  <symbol id="arrow-ur" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></symbol>
+  <!-- Wind: animated turbulence + displacement makes the pleated bg billow like fabric -->
+  <filter id="wind" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.010 0.018" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- ===== Custom cursor ===== -->
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+<!-- ===== Preloader ===== -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__wind" aria-hidden="true"></div>
+  <div class="preloader__inner">
+    <img class="preloader__mark" src="assets/img/logo/icon-colored.png" alt="SnowFlare" />
+    <div class="preloader__word"><span>S</span><span>N</span><span>O</span><span>W</span><span>F</span><span>L</span><span>A</span><span>R</span><span>E</span></div>
+  </div>
+  <div class="preloader__count"><span id="count">0</span><i>%</i></div>
+</div>
+
+<!-- ===== Floating pill nav ===== -->
+<header class="pill" id="pill" data-glass data-radius="999" data-distortion="-110" data-blur="9" data-displace="0.5" data-saturation="1.6" data-brightness="58">
+  <a class="pill__brand" href="#top" aria-label="SnowFlare home">
+    <svg viewBox="0 0 240 252" aria-hidden="true"><use href="#nexus"/></svg>
+  </a>
+  <nav class="pill__nav" aria-label="Primary">
+    <a href="#work" class="is-active">Work</a>
+    <a href="#studio">Studio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="pill__cta" href="#contact" data-cursor="hover">Start<span> a project</span></a>
+</header>
+
+<!-- ===== Smooth-scroll wrapper ===== -->
+<div id="scroll">
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__logo" aria-hidden="true">
+      <img class="nx nx--flare"  src="assets/img/logo/nx-flare.png"  alt="" />
+      <img class="nx nx--bridge" src="assets/img/logo/nx-bridge.png" alt="" />
+      <img class="nx nx--arrow"  src="assets/img/logo/nx-arrow.png"  alt="" />
+    </div>
+
+    <p class="hero__kicker reveal-fade">SnowFlare — Digital Group</p>
+    <h1 class="hero__title">
+      <span class="line"><span class="line__in">We build</span></span>
+      <span class="line"><span class="line__in">digital that's</span></span>
+      <span class="line"><span class="line__in line__grad">unmistakably yours.</span></span>
+    </h1>
+    <p class="hero__sub reveal-fade">Strategy, engineering and AI-powered creative — integrated into one accountable system.</p>
+    <a class="hero__scroll reveal-fade" href="#intro" aria-label="Scroll"><span>Scroll</span><i></i></a>
+  </section>
+
+  <!-- ===== APPROACH STATEMENT ===== -->
+  <section class="statement" id="intro">
+    <p class="statement__eyebrow reveal-fade">(Our approach)</p>
+    <h2 class="statement__big">
+      <span class="line"><span class="line__in">We partner with ambitious</span></span>
+      <span class="line"><span class="line__in">brands and build the digital</span></span>
+      <span class="line"><span class="line__in">products that <em>move them forward.</em></span></span>
+    </h2>
+  </section>
+
+  <!-- ===== FEATURED WORK (bento) ===== -->
+  <section class="work" id="work">
+    <div class="work__head">
+      <p class="kick reveal-fade">Selected work</p>
+      <h2 class="work__title reveal-fade">Built for real businesses.</h2>
+      <a class="work__lib reveal-fade" href="library.html" data-cursor="hover">Explore the full library <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#arrow-ur"/></svg></a>
+    </div>
+
+    <div class="gallery3d" data-cursor="hover" aria-label="Project showcase — drag to spin">
+      <div class="gallery3d__cylinder">
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">microless.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#19315e,#A9D6FF)"><span class="site-card__cat">E-commerce</span><span class="site-card__name">Microless</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">espace.ae</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#2a2440,#FFC857)"><span class="site-card__cat">Real Estate</span><span class="site-card__name">Espace</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">almajedperfumes.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#EB5B27,#FFC857)"><span class="site-card__cat">Luxury Retail</span><span class="site-card__name">Al Majed Perfumes</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">miradigital.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#A9D6FF,#EB5B27)"><span class="site-card__cat">Agency</span><span class="site-card__name">Mira Digital</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">symax.io</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#192749,#A9D6FF)"><span class="site-card__cat">Investment</span><span class="site-card__name">Symax</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">microless.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#19315e,#A9D6FF)"><span class="site-card__cat">E-commerce</span><span class="site-card__name">Microless</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">espace.ae</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#2a2440,#FFC857)"><span class="site-card__cat">Real Estate</span><span class="site-card__name">Espace</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">almajedperfumes.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#EB5B27,#FFC857)"><span class="site-card__cat">Luxury Retail</span><span class="site-card__name">Al Majed Perfumes</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">miradigital.com</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#A9D6FF,#EB5B27)"><span class="site-card__cat">Agency</span><span class="site-card__name">Mira Digital</span></div></div></div>
+        <div class="gallery3d__face"><div class="site-card"><div class="site-card__bar"><span></span><span></span><span></span><i class="site-card__url">symax.io</i></div><div class="site-card__screen" style="--g:linear-gradient(140deg,#192749,#A9D6FF)"><span class="site-card__cat">Investment</span><span class="site-card__name">Symax</span></div></div></div>
+      </div>
+    </div>
+    <p class="gallery3d__hint reveal-fade"><span>Drag to spin</span> · 41 projects across Egypt · UAE · UK · Bulgaria</p>
+  </section>
+
+  <!-- ===== DOME GALLERY — draggable 3D sphere of projects ===== -->
+  <section class="dome-sec" aria-label="Project sphere — drag to rotate">
+    <p class="kick reveal-fade" style="text-align:center">Our work, in orbit</p>
+    <div class="sphere-root">
+      <main class="sphere-main">
+        <div class="stage"><div class="sphere"></div></div>
+        <div class="overlay"></div>
+        <div class="overlay overlay--blur"></div>
+        <div class="edge-fade edge-fade--top"></div>
+        <div class="edge-fade edge-fade--bottom"></div>
+      </main>
+    </div>
+    <p class="dome__hint reveal-fade"><span>Drag to rotate</span> · 41 projects across Egypt · UAE · UK · Bulgaria</p>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="stat"><span class="stat__n" data-count="41">0</span><span class="stat__l">Projects delivered</span></div>
+    <div class="stat"><span class="stat__n" data-count="28">0</span><span class="stat__l">E-commerce builds</span></div>
+    <div class="stat"><span class="stat__n" data-count="4">0</span><span class="stat__l">Countries</span></div>
+    <div class="stat"><span class="stat__n stat__n--w">3→1</span><span class="stat__l">Studios, one system</span></div>
+  </section>
+
+  <!-- ===== STUDIO / SERVICES ===== -->
+  <section class="studio" id="studio">
+    <p class="kick reveal-fade">The studio</p>
+    <h2 class="studio__title reveal-fade">Three disciplines.<br/>One system.</h2>
+    <ul class="disc">
+      <li class="disc__row" data-cursor="hover">
+        <span class="disc__i">01</span>
+        <span class="disc__name" data-label="Strategy">Unleash</span>
+        <span class="disc__role">Strategy &amp; brand</span>
+        <span class="disc__dot disc__dot--ice"></span>
+      </li>
+      <li class="disc__row" data-cursor="hover">
+        <span class="disc__i">02</span>
+        <span class="disc__name" data-label="Engineering">Notech</span>
+        <span class="disc__role">Web, e-commerce &amp; platforms</span>
+        <span class="disc__dot disc__dot--gold"></span>
+      </li>
+      <li class="disc__row" data-cursor="hover">
+        <span class="disc__i">03</span>
+        <span class="disc__name" data-label="Creative">AI Lazy Guy</span>
+        <span class="disc__role">AI-powered creative</span>
+        <span class="disc__dot disc__dot--orange"></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ===== MISSION STATEMENT ===== -->
+  <section class="statement statement--alt">
+    <p class="statement__eyebrow reveal-fade">(Our mission)</p>
+    <h2 class="statement__big">
+      <span class="line"><span class="line__in">We help exceptional clients</span></span>
+      <span class="line"><span class="line__in">scale with confidence — and we</span></span>
+      <span class="line"><span class="line__in"><em>stay accountable</em> for the outcome.</span></span>
+    </h2>
+  </section>
+
+  <!-- ===== CLIENTS — LogoLoop ===== -->
+  <section class="clients" aria-label="Brands we have worked with">
+    <p class="clients__kick reveal-fade">Brands we've built for</p>
+    <div class="logoloop logoloop--fade" data-speed="55" data-hoverspeed="0" data-direction="left" style="--logoloop-fadeColor:#0B1428">
+      <div class="logoloop__track">
+        <ul class="logoloop__list" role="list">
+          <li class="logoloop__item"><span class="brand">Microless</span></li>
+          <li class="logoloop__item"><span class="brand">Espace</span></li>
+          <li class="logoloop__item"><span class="brand">Al Majed Perfumes</span></li>
+          <li class="logoloop__item"><span class="brand">Mira Digital</span></li>
+          <li class="logoloop__item"><span class="brand">Symax</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="end" id="contact">
+    <div class="end__glow" aria-hidden="true"></div>
+    <p class="end__eyebrow reveal-fade">Built. Yours.</p>
+    <h2 class="end__title">
+      <span class="line"><span class="line__in">Let's build</span></span>
+      <span class="line"><span class="line__in line__grad">yours.</span></span>
+    </h2>
+    <a class="end__mail" href="mailto:hello@snowflare.com" data-cursor="hover">hello@snowflare.com</a>
+    <div class="end__links reveal-fade">
+      <a href="https://snowflare.com" target="_blank" rel="noopener" data-cursor="hover">snowflare.com</a>
+      <a href="https://instagram.com/snowflare" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot__brand">
+      <svg viewBox="0 0 240 252" aria-hidden="true"><use href="#nexus"/></svg>
+      <span>SNOWFLARE</span>
+    </div>
+    <p class="foot__tag" lang="ar" dir="rtl">صُنع خصيصًا لك</p>
+    <p class="foot__meta">© 2026 SnowFlare — Strategy · Engineering · AI-Powered Creative</p>
+  </footer>
+
+</main>
+</div>
+
+<script src="assets/js/vendor/gsap.min.js"></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/logoloop.js"></script>
+<script src="assets/js/glass.js"></script>
+<script src="assets/js/gallery3d.js"></script>
+<script src="assets/js/dome.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work Library — SnowFlare</title>
+  <meta name="description" content="Every project SnowFlare has built — filter by category, sort A–Z." />
+  <link rel="icon" type="image/png" href="assets/img/logo/icon-colored.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    body{background:var(--navy-deep)}
+    .lib-top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px var(--pad);background:rgba(11,20,40,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(169,214,255,.14)}
+    .lib-brand{display:flex;align-items:center;gap:11px;color:#fff}
+    .lib-brand svg{width:26px;height:27px;color:#fff}
+    .lib-brand span{font-weight:700;letter-spacing:.14em;font-size:1rem}
+    .lib-top__right{display:flex;align-items:center;gap:18px}
+    .lib-home{color:var(--mut);font-weight:500;font-size:.95rem}
+    .lib-home:hover{color:#fff}
+    .lib-start{padding:10px 18px;border-radius:999px;background:var(--orange);color:#fff;font-weight:600;font-size:.9rem;transition:background .25s,transform .25s}
+    .lib-start:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px)}
+    .lib-header{padding:7vh var(--pad) 3vh;max-width:var(--maxw);margin:0 auto}
+    .lib-header .kick{color:var(--gold);font-size:.8rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
+    .lib-header h1{font-weight:900;font-size:clamp(2.4rem,6.5vw,4.8rem);letter-spacing:-.025em;line-height:.98}
+    .lib-header p{color:var(--mut);margin-top:18px;font-size:clamp(1rem,1.6vw,1.2rem);max-width:54ch}
+    .lib-toolbar{position:sticky;top:57px;z-index:40;background:rgba(11,20,40,.78);backdrop-filter:blur(12px);border-block:1px solid rgba(169,214,255,.1);padding:16px 0}
+    .lib-toolbar__in{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+    .lib-toolbar__row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .lib-search{flex:1;min-width:200px;background:#16244a;border:1px solid rgba(169,214,255,.18);border-radius:10px;padding:12px 16px;color:#fff;font-family:var(--font);font-size:.95rem}
+    .lib-search::placeholder{color:var(--mut)}
+    .lib-search:focus{outline:none;border-color:var(--ice)}
+    .lib-sort{background:transparent;border:1px solid rgba(169,214,255,.3);border-radius:10px;padding:12px 18px;color:#fff;font-family:var(--font);font-weight:600;font-size:.9rem;cursor:pointer;white-space:nowrap;transition:border-color .2s}
+    .lib-sort:hover{border-color:var(--ice)}
+    .lib-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+    .lib-chip{background:transparent;border:1px solid rgba(169,214,255,.2);border-radius:999px;padding:8px 16px;color:var(--mut);font-family:var(--font);font-weight:500;font-size:.88rem;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+    .lib-chip:hover{color:#fff;border-color:var(--ice)}
+    .lib-chip.is-active{background:var(--ice);border-color:var(--ice);color:var(--navy);font-weight:600}
+    .lib-count{max-width:var(--maxw);margin:24px auto 0;padding:0 var(--pad);color:var(--mut);font-size:.88rem;letter-spacing:.04em}
+    .lib-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;padding:16px var(--pad) 12vh}
+    .lib-card{display:flex;flex-direction:column;animation:libIn .4s var(--e) both}
+    @keyframes libIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .lib-card__cover{position:relative;aspect-ratio:16/11;border-radius:14px;overflow:hidden;background:var(--g);background-size:cover;border:1px solid rgba(169,214,255,.16);display:block;transition:transform .35s var(--e),box-shadow .35s var(--e),border-color .35s}
+    .lib-card__cover:hover{transform:translateY(-5px);border-color:var(--ice-30,rgba(169,214,255,.4));box-shadow:0 26px 54px -26px rgba(0,0,0,.85)}
+    .lib-card__bar{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;gap:6px;padding:0 12px;background:rgba(8,14,28,.45)}
+    .lib-card__bar i{width:7px;height:7px;border-radius:50%}
+    .lib-card__bar i:nth-child(1){background:#EB5B27}.lib-card__bar i:nth-child(2){background:#FFC857}.lib-card__bar i:nth-child(3){background:#A9D6FF}
+    .lib-card__visit{position:absolute;bottom:12px;right:14px;font-size:.82rem;font-weight:700;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+    .lib-card__cover:hover .lib-card__visit{opacity:1;transform:none}
+    .lib-card__info{padding:14px 4px 0}
+    .lib-card__cat{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .lib-card__name{font-size:1.3rem;font-weight:800;margin-top:5px;color:#fff}
+    .lib-empty{grid-column:1/-1;color:var(--mut);padding:60px 0;text-align:center;font-size:1.05rem}
+    .lib-note{max-width:var(--maxw);margin:0 auto 10vh;padding:22px var(--pad)}
+    .lib-note p{color:var(--mut);font-size:.92rem;border-left:2px solid var(--gold);padding-left:16px}
+    .lib-foot{border-top:1px solid rgba(169,214,255,.12);padding:34px var(--pad);text-align:center;color:var(--mut);font-size:.85rem}
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="nexus" viewBox="0 0 240 252"><g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M120 156 V238 M62 206 L120 156 L178 206"/><path d="M16 144 L80 144 L104 116 L136 116 L160 144 L224 144"/><path d="M120 14 V84 M60 46 L104 88 M180 46 L136 88"/></g></symbol>
+  </defs></svg>
+
+  <header class="lib-top">
+    <a class="lib-brand" href="index.html" aria-label="SnowFlare home">
+      <svg viewBox="0 0 240 252" aria-hidden="true"><use href="#nexus"/></svg><span>SNOWFLARE</span>
+    </a>
+    <div class="lib-top__right">
+      <a class="lib-home" href="index.html">← Home</a>
+      <a class="lib-start" href="mailto:hello@snowflare.com">Start a project</a>
+    </div>
+  </header>
+
+  <section class="lib-header">
+    <p class="kick">Work Library</p>
+    <h1>Every project,<br/>in one place.</h1>
+    <p>41 websites and platforms delivered across Egypt, the UAE, the UK and Bulgaria. Filter by category or sort A–Z.</p>
+  </section>
+
+  <div class="lib-toolbar">
+    <div class="lib-toolbar__in">
+      <div class="lib-toolbar__row">
+        <input id="libSearch" class="lib-search" type="search" placeholder="Search projects…" aria-label="Search projects" />
+        <button id="libSort" class="lib-sort" type="button">Sort: A → Z</button>
+      </div>
+      <div id="libChips" class="lib-chips"></div>
+    </div>
+  </div>
+
+  <p id="libCount" class="lib-count"></p>
+  <div id="libGrid" class="lib-grid"></div>
+
+  <div class="lib-note">
+    <p><strong>Note:</strong> this library is seeded with sample projects. Send the full list (name · category · link · optional screenshot) and it'll be populated — the filters and sorting already work.</p>
+  </div>
+
+  <footer class="lib-foot">© 2026 SnowFlare — Built. Yours.</footer>
+
+  <script src="assets/js/library.js"></script>
+</body>
+</html>
