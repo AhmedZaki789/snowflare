@@ -12,7 +12,7 @@
   const MAXV = 5;           // max vertical rotation (deg) — keeps the dome look
   const SENS = 20;          // drag sensitivity
 
-  const IMAGES = Array.from({ length: 9 }, (_, i) => `assets/img/bg/${i + 1}.png`);
+  const IMAGES = Array.from({ length: 9 }, (_, i) => `assets/img/bg/${i + 1}.jpg`);
   const LABELS = ['Microless', 'Espace', 'Al Majed Perfumes', 'Mira Digital', 'Symax'];
 
   const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
@@ -115,14 +115,17 @@
     main.addEventListener('pointercancel', endDrag);
     window.addEventListener('pointerup', endDrag);
 
-    /* ---- gentle idle auto-spin ---- */
-    let idle = true;
+    /* ---- gentle idle auto-spin (gated to on-screen — 175 tiles are costly to recomposite) ---- */
+    let idle = true, visible = true;
     main.addEventListener('pointerenter', () => { idle = false; });
     main.addEventListener('pointerleave', () => { idle = true; });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { rootMargin: '120px' }).observe(root);
+    }
     let last = null;
     function autoFrame(ts) {
       if (last === null) last = ts; const dt = (ts - last) / 1000; last = ts;
-      if (idle && !dragging && !rafId) { rotY = wrapSigned(rotY + 4 * dt); applyTransform(); }
+      if (visible && idle && !dragging && !rafId) { rotY = wrapSigned(rotY + 4 * dt); applyTransform(); }
       requestAnimationFrame(autoFrame);
     }
     if (!reduce) requestAnimationFrame(autoFrame);

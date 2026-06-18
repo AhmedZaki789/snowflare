@@ -44,7 +44,7 @@ body.cur-view .cursor__label{opacity:1}
 .preloader{display:none}
 .js .preloader{display:flex;position:fixed;inset:0;z-index:9000;background:var(--navy-deep);flex-direction:column;align-items:center;justify-content:center;gap:26px}
 .preloader.done{transform:translateY(-101%);transition:transform 1s var(--e-out)}
-.preloader__wind{position:absolute;inset:-9%;z-index:0;background:url("../img/bg/3.png") center/cover;opacity:.2;mix-blend-mode:screen;filter:url(#wind);animation:acSwing 9s ease-in-out infinite;will-change:transform;pointer-events:none}
+.preloader__wind{position:absolute;inset:-9%;z-index:0;background:url("../img/bg/3.jpg") center/cover;opacity:.2;mix-blend-mode:screen;animation:acSwing 9s ease-in-out infinite;will-change:transform;pointer-events:none}
 .preloader__inner{position:relative;z-index:2;display:flex;align-items:center;gap:18px}
 .preloader__mark{width:62px;height:62px;object-fit:contain;animation:plMark 1s var(--e-out) both}
 @keyframes plMark{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
@@ -90,7 +90,7 @@ section{position:relative}
 
 /* ===== HERO ===== */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:14vh var(--pad) 12vh;overflow:hidden}
-.hero__bg{position:absolute;inset:-9%;z-index:0;background:url("../img/bg/1.png") center/cover;opacity:.34;mix-blend-mode:screen;filter:url(#wind);animation:acSwing 8s ease-in-out infinite;will-change:transform}
+.hero__bg{position:absolute;inset:-9%;z-index:0;background:url("../img/bg/1.jpg") center/cover;opacity:.34;mix-blend-mode:screen;animation:acSwing 8s ease-in-out infinite;will-change:transform}
 /* "AC wings": the vertical slats swing like air-conditioner louver blades
    (a slow 3D rotateY rock). GPU-cheap; scale overscan hides the turning edges. */
 @keyframes acSwing{
@@ -119,17 +119,17 @@ section{position:relative}
 .statement::before,.studio::before,.end::before,.work::before,.stats::before,.clients::before{
   content:"";position:absolute;inset:-11%;z-index:-1;
   background:center/cover no-repeat;
-  opacity:.3;mix-blend-mode:screen;filter:url(#wind);
+  opacity:.3;mix-blend-mode:screen;
   animation:acSwing 8s ease-in-out infinite;pointer-events:none;
 }
 /* per-section colour variety (cool → warm progression) */
-#intro::before{background-image:url("../img/bg/3.png")}        /* approach — ice blue */
-.studio::before{background-image:url("../img/bg/9.png")}        /* studio — cool */
-.statement--alt::before{background-image:url("../img/bg/8.png")} /* mission — warm gold */
-.end::before{background-image:url("../img/bg/2.png");opacity:.34} /* CTA — fiery orange */
-.work::before{background-image:url("../img/bg/5.png");opacity:.2}
-.stats::before{background-image:url("../img/bg/4.png");opacity:.22}
-.clients::before{background-image:url("../img/bg/7.png");opacity:.18}
+#intro::before{background-image:url("../img/bg/3.jpg")}        /* approach — ice blue */
+.studio::before{background-image:url("../img/bg/9.jpg")}        /* studio — cool */
+.statement--alt::before{background-image:url("../img/bg/8.jpg")} /* mission — warm gold */
+.end::before{background-image:url("../img/bg/2.jpg");opacity:.34} /* CTA — fiery orange */
+.work::before{background-image:url("../img/bg/5.jpg");opacity:.2}
+.stats::before{background-image:url("../img/bg/4.jpg");opacity:.22}
+.clients::before{background-image:url("../img/bg/7.jpg");opacity:.18}
 
 /* ===== WORK / bento ===== */
 .work{padding:8vh var(--pad) 14vh}
