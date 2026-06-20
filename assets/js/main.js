@@ -83,21 +83,16 @@
     setTimeout(reveal, 6000); // hard safety net
   }
 
-  /* ---------- Smooth scroll + parallax ---------- */
-  const enableSmooth = fine && !reduce && window.innerWidth > 1024;
-  let curY = 0, tgtY = 0;
-  const speedEls = [...document.querySelectorAll('[data-speed]')];
-
-  function sizeBody() {
-    if (enableSmooth && wrap) body.style.height = wrap.getBoundingClientRect().height + 'px';
-    else body.style.height = '';
-  }
-  if (enableSmooth) {
-    body.classList.add('smooth');
-    if ('ResizeObserver' in window) new ResizeObserver(sizeBody).observe(wrap);
-  }
-  window.addEventListener('load', sizeBody);
-  window.addEventListener('resize', sizeBody);
+  /* ---------- Native scroll + nav active-tracking ----------
+     The custom momentum smooth-scroll (a position:fixed #scroll wrapper
+     translate3d-ed on EVERY frame) was the main cause of the scroll lag — it
+     turned the whole page into one giant layer repainted continuously. Its
+     parallax also clashed with the clients marquee's data-speed (=55), shoving
+     it far off-screen on desktop. Removed entirely: native scroll is instant,
+     GPU-friendly, and the IntersectionObserver reveals/anim still work. */
+  function sizeBody() { body.style.height = ''; }
+  sizeBody();
+  window.addEventListener('resize', sizeBody, { passive: true });
 
   const pill = document.getElementById('pill');
   const navLinks = pill ? [...pill.querySelectorAll('.pill__nav a')] : [];
@@ -113,22 +108,15 @@
     });
     navLinks.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === activeId));
   }
-
-  function raf() {
-    tgtY = window.scrollY || window.pageYOffset || 0;
-    curY = lerp(curY, tgtY, 0.085);
-    if (Math.abs(tgtY - curY) < 0.06) curY = tgtY;
-    if (enableSmooth && wrap) {
-      wrap.style.transform = `translate3d(0,${-curY}px,0)`;
-      for (const el of speedEls) {
-        const sp = parseFloat(el.dataset.speed) || 0;
-        el.style.transform = `translate3d(0,${curY * sp}px,0)`;
-      }
-    }
-    updateActive();
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  /* update at most once per frame, and only while actually scrolling — no
+     perpetual requestAnimationFrame loop running when the page is idle. */
+  let navTick = false;
+  window.addEventListener('scroll', () => {
+    if (navTick) return; navTick = true;
+    requestAnimationFrame(() => { updateActive(); navTick = false; });
+  }, { passive: true });
+  window.addEventListener('load', updateActive);
+  updateActive();
 
   /* ---------- Anchor links ---------- */
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -138,8 +126,8 @@
       const t = document.querySelector(id);
       if (!t) return;
       e.preventDefault();
-      const y = t.getBoundingClientRect().top + (enableSmooth ? curY : (window.scrollY || 0));
-      window.scrollTo({ top: Math.max(0, y - 8), behavior: (enableSmooth || reduce) ? 'auto' : 'smooth' });
+      const y = t.getBoundingClientRect().top + (window.scrollY || 0);
+      window.scrollTo({ top: Math.max(0, y - 8), behavior: reduce ? 'auto' : 'smooth' });
     });
   });
 
@@ -174,5 +162,17 @@
       const sIO = new IntersectionObserver((es) => { es.forEach((e) => { if (e.isIntersecting) { runCount(e.target); sIO.unobserve(e.target); } }); }, { threshold: 0.6 });
       stats.forEach((el) => sIO.observe(el));
     }
+  }
+
+  /* ---------- Pause the looping background "louver" animations off-screen ----------
+     7 sections each run an infinite acSwing transform; only the 1–2 on screen
+     need to. Invisible (you can't see off-screen sections) but cuts constant
+     GPU compositing. */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const bgSecs = [...document.querySelectorAll('.hero,#intro,.studio,.statement--alt,.end,.work,.stats,.clients')];
+    const bgIO = new IntersectionObserver((es) => {
+      es.forEach((e) => e.target.classList.toggle('bg-off', !e.isIntersecting));
+    }, { rootMargin: '10% 0px' });
+    bgSecs.forEach((s) => { s.classList.add('bg-off'); bgIO.observe(s); });
   }
 })();
